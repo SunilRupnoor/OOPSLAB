@@ -1,77 +1,75 @@
-Design a C++ program to convert dollar to rupees, euro to rupees and pound to rupees using pure virtual functions.
-1 dollar = 54.3 Rs, 1 pound = 81.1Rs, 1 euro = 70Rs
+//Sorting using Generic classes
 #include<iostream>
+#include<cstdlib>
 using namespace std;
-class rs
+const int SIZE=10;
+template<class atype>class sort
 {
-  public:
-  float rupees;
-  virtual void conv()=0;
-  void disp()
+  public: atype a[SIZE];
+  atype &operator[](int i)
   {
-    cout<<" is eqvivalent to "<<rupees<<" INR \n";
+    if(i<0||i>SIZE-1)
+    {
+      cout<<"\nIndex value of ";
+      cout<<i<<" is out-of-bonds.\n";
+      exit(1);
+    }
+    return a[i];
+  }
+  sort(){}
+  void read(int z)
+  {
+    for(int i=0;i<z;i++)
+    cin>>a[i];
+  }
+  void disp(int z)
+  {
+    for(int i=0;i<z;i++)
+    cout<<a[i]<<" ";
+    cout<<"\n";
   }
 };
-class doll:public rs
-{
-  float dol;
-  public:
-  void conv()
+  template<class X> void bubble(X *items,int count)
   {
-    cout<<"Enter currncy in dollar \n";
-    cin>>dol;
-    rupees=54.3*dol;
-    cout<<" "<<dol<<" in dollar ";
-    disp();
-  }
-};
-class euro:public rs
-{
-  float er;
-  public:
-  void conv()
-  {
-    cout<<"Enter currency in Euro \n";
-    cin>>er;
-    rupees=70.2*er;
-    cout<<" "<<er<<" in euro ";
-    disp();
-  }
-};
-class pd:public rs
-{
-  float pnd;
-  public:
-  void conv()
-  {
-    cout<<"Enter currency in pound \n";
-    cin>>pnd;
-    rupees=81.1*pnd;
-    cout<<" "<<pnd<<" in pound ";
-    disp();
-  }
+    register int a,b;
+    X t;
+    for(a=1;a<count;a++)
+    {
+      for(b=count-1;b>=a;b--)
+      {
+        if(items[b-1]>items[b])
+        {
+          t=[b-1];
+          [b-1]=[b];
+          [b]=t;
+        }
+      }
+    }
 };
 int main()
 {
-  int c;
-  doll d;
-  euro e;
-  pd p;
-  cout<<"\t\t\t Currency conversion \n";
-  while(1)
-  {
-    cout<<"1.$ to Rs. 2.Euro to Rs. 3.Pound to Rs. 4.Exit \n";
-    cin>>c;
-    switch(c)
-    {
-        case 1:d.conv();
-        break;
-  case 2:e.conv();
-  break;
-  case 3:p.conv();
-  break;
-  default:return 0;
-  }
-}
-return 0;
+  sort <int> intob;
+  sort <double> doubleob;
+  int i,m,n;
+  cout<<"\nEnter the size of integer array: -\n";
+  cin>>n;
+  cout<<"\nEnter the size of double array: -\n";
+  cin>>m;
+  intob[n-1]=0;
+  doubleob[m-1]=0;
+  cout<<"\nEnter the integer array:-\n";
+  intob.read(n);
+  cout<<"\nEnter the double array:-\n";
+  doubleob.read(m);
+  cout<<"\nUnsorted integer array is:-\n";
+  intob.disp(n);
+  cout<<"\nUnsorted double array is:-\n";
+  doubleob.disp(m);
+  intob.bubble(intob.a,n);
+  doubleob.bubble(doubleob.a,m);
+  cout<<"\nSorted integer array is:-\n";
+  intob.disp(n);
+  cout<<"\nSorted double array is:-\n";
+  doubleob.disp(m);
+  return 0;
 }
